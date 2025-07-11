@@ -1,0 +1,58 @@
+ <div class="row">
+  <div class="col-3" id="user-profile">
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ user?.name }} {{ user?.surname }}</h5>
+          <p class="card-text"></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-9" id="user-entries">
+      <h3>Trainings</h3>
+      <table class="table table-striped">
+        <thead>
+            <th scope="col">Date</th>
+            <th scope="col">Training type</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Calories burned</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let training of trainings">
+                <td>
+                    {{ training.entry.dateOfEntry }}
+                </td>
+                <td>
+                    {{ training.trainingType.toString() }}
+                </td>
+                <td>
+                    {{ training.duration }}
+                </td>
+                <td>
+                    {{ training.caloriesBurned }}
+                </td>
+            </tr>
+        </tbody>
+      </table>
+
+      <br>
+      <h3>Nutrition</h3>
+      <table class="table table-striped">
+        <thead>
+          <th>Date</th>
+          <th>Calories</th>
+          <th>Carbohydrates</th>
+          <th>Proteins</th>
+          <th>Fats</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let nutrition of nutritions">
+            <td>{{ nutrition.entry.dateOfEntry }}</td>
+            <td>{{ nutrition.calories }}</td>
+            <td>{{ nutrition.carbohydrates }}</td>
+            <td>{{ nutrition.protein }}</td>
+            <td>{{ nutrition.fats }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

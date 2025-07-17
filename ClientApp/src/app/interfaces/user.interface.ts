@@ -5,9 +5,15 @@ export interface User {
     surname: string,
     email: string,
     password: string,
+    userRole: UserRole
 }
 
 export interface LoginForm {
     username: string,
     password: string,
+}
+
+export enum UserRole {
+    User = 2,
+    Curator = 1
 }

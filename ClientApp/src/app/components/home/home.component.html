@@ -1,15 +1,46 @@
- <div class="row">
+<div class="row">
   <div class="col-3" id="user-profile">
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{ user?.name }} {{ user?.surname }}</h5>
-          <p class="card-text"></p>
-        </div>
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{ user?.name }} {{ user?.surname }}</h5>
+        <p class="card-text">
+          <button (click)="logout($event)">Log out</button>
+        </p>
       </div>
     </div>
-    <div class="col-9" id="user-entries">
-      <h3>Trainings</h3>
-      <table class="table table-striped">
+  </div>
+  <div class="col-9">
+    <h3>Daily Trainings</h3>
+    <ngx-charts-line-chart [view]="[800, 300]" [results]="trainingLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
+      [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Value'" [autoScale]="true">
+    </ngx-charts-line-chart>
+
+    <h3>Daily Nutrition</h3>
+    <ngx-charts-line-chart [view]="[800, 300]" [results]="nutritionLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
+      [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Value'" [autoScale]="true">
+    </ngx-charts-line-chart>
+
+    <h3>Weight Statistics</h3>
+    <ngx-charts-line-chart [view]="[800, 300]" [results]="weigthLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
+      [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Value'" [autoScale]="true">
+    </ngx-charts-line-chart>
+
+    <br>
+    <h3>Nutrition balance</h3>
+    <ngx-charts-pie-chart [view]="[500, 500]" [results]="pieChartData" [legend]="true" [labels]="true" [doughnut]="false" [explodeSlices]="false" [gradient]="true">
+          </ngx-charts-pie-chart>
+  </div>
+</div>
+
+<!--
+
+   <ngx-charts-pie-chart [view]="[300, 300]" [results]="pieChartData" [legend]="false" [labels]="true" [doughnut]="false" [explodeSlices]="false" [gradient]="true">
+          </ngx-charts-pie-chart>
+          <ngx-charts-line-chart [view]="[500, 300]" [results]="lineChartData" [xAxis]="true" [yAxis]="true" [legend]="false" [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Value'" [autoScale]="true">
+          </ngx-charts-line-chart>
+
+  <h3>Trainings</h3>
+  <table class="table table-striped">
         <thead>
             <th scope="col">Date</th>
             <th scope="col">Training type</th>
@@ -33,8 +64,7 @@
             </tr>
         </tbody>
       </table>
-
-      <br>
+    <br>
       <h3>Nutrition</h3>
       <table class="table table-striped">
         <thead>
@@ -54,5 +84,5 @@
           </tr>
         </tbody>
       </table>
-    </div>
-  </div>
+  
+  -->

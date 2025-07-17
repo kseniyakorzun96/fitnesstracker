@@ -1,10 +1,12 @@
 import { Component } from "@angular/core";
-import { Nutrition, Training } from "../../interfaces/entry.interface";
+import { CData, Nutrition, Training, TrainingType, Weigth } from "../../interfaces/entry.interface";
 import { UserService } from "../../services/user.service";
 import { User } from "../../interfaces/user.interface";
 import { TrainingService } from "../../services/training.service";
 import { NutritionService } from "../../services/nutrition.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AuthService } from "../../services/auth.service";
+import { WeigthService } from "../../services/weigth.service";
 
 @Component({
   selector: 'app-home',
@@ -12,46 +14,174 @@ import { ActivatedRoute } from "@angular/router";
   standalone: false
 })
 export class HomeComponent {
-    user: User | null = null;
-    trainings: Training[] = [];
-    nutritions: Nutrition[] = [];
+  user: User | null = null;
+  trainings: Training[] = [];
+  nutritions: Nutrition[] = [];
+  weigth: Weigth[] = [];
 
-    constructor(private route: ActivatedRoute,
-                private trainingService: TrainingService,
-                private nutritionService: NutritionService,
-                private userService: UserService) {}
+  trainingLineChartData: any[] = [];
+  nutritionLineChartData: any[] = [];
+  weigthLineChartData: any[] = [];
 
-    ngOnInit(): void {
+  pieChartData: any[] = [];
+  dateTrack: any;
+
+  constructor(private route: ActivatedRoute,
+    private trainingService: TrainingService,
+    private nutritionService: NutritionService,
+    private userService: UserService,
+    private authService: AuthService,
+    private weigthService: WeigthService,
+    private router: Router) { }
+
+  ngOnInit(): void {
     var userId = 'kkorzun';
-    
+    this.dateTrack = this.getLast7Days();
+
     if (userId != null) {
       this.trainingService.getTrainings(userId).subscribe({
-      next: (data) => {
-        this.trainings = data;
-        console.log('loaded:', this.trainings);
+        next: (data) => {
+          this.trainings = data;
+          this.initLineChartData();
+          console.log('loaded:', this.trainings);
+        },
+        error: (err) => {
+          console.error('Failed to load:', err);
+        }
+      });
+
+      this.userService.getUser(userId).subscribe({
+        next: (data) => {
+          this.user = data;
+        },
+        error: (err) => {
+          console.error('Failed to load:', err);
+        }
+      });
+
+      this.nutritionService.getNutrition(userId).subscribe({
+        next: (data) => {
+          this.nutritions = data;
+          this.initPieChartData();
+          this.initNutritionLineChartData();
+        },
+        error: (err) => {
+          console.error('Failed to load:', err);
+        }
+      });
+
+      this.weigthService.getWeigth(userId).subscribe({
+        next: (data) => {
+          this.weigth = data;
+          console.log(this.weigth);
+          this.initWeigthLineChartData();
+        },
+        error: (err) => {
+          console.error('Failed to load:', err);
+        }
+      })
+    }
+  }
+
+  initLineChartData() {
+    this.trainingLineChartData = [
+      {
+        name: 'Calories Burned',
+        series: this.trainings.map(t => ({
+          name: t.entry.dateOfEntry,
+          value: t.caloriesBurned
+        }))
       },
-      error: (err) => {
-        console.error('Failed to load:', err);
+      {
+        name: 'Duration (min)',
+        series: this.trainings.map(t => ({
+          name: t.entry.dateOfEntry,
+          value: t.duration
+        }))
       }
+    ];
+  }
+
+  initNutritionLineChartData() {
+    this.nutritionLineChartData = [
+      {
+        name: 'Calories',
+        series: this.nutritions.map(t => ({
+          name: t.entry.dateOfEntry,
+          value: t.calories
+        }))
+      },
+      {
+        name: 'Fats',
+        series: this.nutritions.map(t => ({
+          name: t.entry.dateOfEntry,
+          value: t.fats
+        }))
+      },
+      {
+        name: 'Carbohydrates',
+        series: this.nutritions.map(t => ({
+          name: t.entry.dateOfEntry,
+          value: t.carbohydrates
+        }))
+      },
+      {
+        name: 'Proteins',
+        series: this.nutritions.map(t => ({
+          name: t.entry.dateOfEntry,
+          value: t.protein
+        }))
+      },
+    ];
+  }
+
+  initWeigthLineChartData() {
+     this.weigthLineChartData = [
+      {
+        name: 'Weigth',
+        series: this.weigth.map(t => ({
+          name: t.entry.dateOfEntry,
+          value: t.value
+        }))
+      }
+    ];
+
+    console.log(this.weigthLineChartData)
+  }
+
+  initPieChartData() {
+
+    var p = 0;
+    var f = 0;
+    var c = 0;
+
+    this.nutritions.forEach(element => {
+      p = p + element.protein;
+      f = f + element.fats;
+      c = c + element.carbohydrates;
     });
 
-    this.userService.getUser(userId).subscribe({
-      next: (data) => {
-        this.user = data;
-      },
-      error: (err) => {
-        console.error('Failed to load:', err);
-      }
-    });
+    this.pieChartData = [
+      { name: 'Protein', value: p },
+      { name: 'Carbohydrates', value: c },
+      { name: 'Fats', value: f }
+    ];
 
-    this.nutritionService.getNutrition(userId).subscribe({
-      next: (data) => {
-        this.nutritions = data;
-      },
-      error: (err) => {
-        console.error('Failed to load:', err);
-      }
-    })
-    }  
+    console.log(this.pieChartData);
+  }
+
+  getLast7Days(): Date[] {
+    const dates: Date[] = [];
+    for (let i = 0; i < 7; i++) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      dates.push(d);
+    }
+    return dates;
+  }
+
+  logout(event: MouseEvent) {
+    this.authService.logout();
+    this.router.navigate(['login']);
   }
 }

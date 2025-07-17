@@ -1,4 +1,5 @@
-﻿using FitnessTrackerApp.Services;
+﻿using FitnessTrackerApp.Repositories;
+using FitnessTrackerApp.Services;
 using FitnessTrackerApp.Services.Auth;
 using FitnessTrackerApp.Services.Nutrition;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -28,6 +29,11 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITrainingService, TrainingService>();
 builder.Services.AddScoped<INutritionService, NutritionService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IWeigthService, WeigthService>();
+
+builder.Services.AddScoped<ITrainingRepository, TrainingRepository>();
+builder.Services.AddScoped<INutritionRepository, NutritionRepository>();
+builder.Services.AddScoped<IWeigthRepository, WeightRepository>();
 
 builder.Services.AddAuthentication(options =>
 {

@@ -7,6 +7,12 @@ export interface Nutrition {
     fats: number
 }
 
+export interface Weigth {
+    id: string,
+    entry: Entry,
+    value: number,
+}
+
 export interface Training {
     id: string,
     entry: Entry,
@@ -18,10 +24,15 @@ export interface Training {
 export interface Entry {
     userId: string,
     dateOfEntry: Date, 
-    updated: Date
+    updated?: Date
 }
 
 export enum TrainingType {
     Cardio = "Cardio",
     Strength = "Strength"
+}
+
+export interface CData {
+    name: string,
+    value: number
 }

@@ -8,5 +8,12 @@
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public UserRole Role { get; set; }
+    }
+
+    public enum UserRole
+    {
+        User = 0,
+        Curator = 1
     }
 }

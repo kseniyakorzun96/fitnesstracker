@@ -11,6 +11,7 @@ import { WeigthService } from "../../services/weigth.service";
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css'],
   standalone: false
 })
 export class HomeComponent {
@@ -24,7 +25,7 @@ export class HomeComponent {
   weigthLineChartData: any[] = [];
 
   pieChartData: any[] = [];
-  dateTrack: any;
+  dateTrack: Date[] = [];
 
   constructor(private route: ActivatedRoute,
     private trainingService: TrainingService,
@@ -136,7 +137,7 @@ export class HomeComponent {
   }
 
   initWeigthLineChartData() {
-     this.weigthLineChartData = [
+    this.weigthLineChartData = [
       {
         name: 'Weigth',
         series: this.weigth.map(t => ({
@@ -172,16 +173,38 @@ export class HomeComponent {
 
   getLast7Days(): Date[] {
     const dates: Date[] = [];
-    for (let i = 0; i < 7; i++) {
+
+    for (let i = -3; i < 4; i++) {
       const d = new Date();
       d.setDate(d.getDate() - i);
       dates.push(d);
     }
-    return dates;
+    return dates.reverse();
   }
 
   logout(event: MouseEvent) {
     this.authService.logout();
     this.router.navigate(['login']);
+  }
+
+  isToday(date: Date) {
+    const today = new Date();
+    return date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
+  }
+
+  getStyles(d: Date) {
+    const today = new Date();
+
+    if (d === today) {
+      return { borderColor: '#007bff' };
+    }
+    if (d > today) {
+      return { borderColor: '#6c757d' };
+    }
+    else {
+      return { borderColor: '#28a745' };
+    }
   }
 }

@@ -1,4 +1,12 @@
 <div class="row">
+  <div *ngFor="let d of dateTrack" class="col">
+    <div class="day-track" [ngStyle]="getStyles(d)">{{ d.getDate() }}</div>
+  </div>
+</div>
+<br>
+<br>
+
+<div class="row">
   <div class="col-3" id="user-profile">
     <div class="card" style="width: 18rem;">
       <div class="card-body">

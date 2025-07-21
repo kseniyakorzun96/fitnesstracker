@@ -1,14 +1,16 @@
-﻿using FitnessTrackerApp.Repositories;
+﻿using AutoMapper;
+using FitnessTracker.Database;
+using FitnessTracker.WebApi;
+using FitnessTrackerApp.Repositories;
 using FitnessTrackerApp.Services;
 using FitnessTrackerApp.Services.Auth;
 using FitnessTrackerApp.Services.Nutrition;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddCors(options =>
 {
@@ -19,9 +21,9 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod());
 });
 
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -34,6 +36,9 @@ builder.Services.AddScoped<IWeigthService, WeigthService>();
 builder.Services.AddScoped<ITrainingRepository, TrainingRepository>();
 builder.Services.AddScoped<INutritionRepository, NutritionRepository>();
 builder.Services.AddScoped<IWeigthRepository, WeightRepository>();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+  options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddAuthentication(options =>
 {

@@ -1,0 +1,15 @@
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\FitnessTracker.Database.csproj.AssemblyReference.cache
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\FitnessTracker.Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\FitnessTracker.Database.AssemblyInfoInputs.cache
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\FitnessTracker.Database.AssemblyInfo.cs
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\FitnessTracker.Database.csproj.CoreCompileInputs.cache
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\FitnessTracker.Database.sourcelink.json
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\bin\Debug\net8.0\FitnessTracker.Database.deps.json
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\bin\Debug\net8.0\FitnessTracker.Database.runtimeconfig.json
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\bin\Debug\net8.0\FitnessTracker.Database.dll
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\bin\Debug\net8.0\FitnessTracker.Database.pdb
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\FitnessTracker.Database.dll
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\refint\FitnessTracker.Database.dll
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\FitnessTracker.Database.pdb
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\FitnessTracker.Database.genruntimeconfig.cache
+C:\Users\v-kkorzun\source\repos\FitnessTrackerApp\FitnessTracker.Database\obj\Debug\net8.0\ref\FitnessTracker.Database.dll

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CData, Nutrition, Training, TrainingType, Weigth } from "../../interfaces/entry.interface";
+import { Nutrition, Training, Weigth } from "../../interfaces/entry.interface";
 import { UserService } from "../../services/user.service";
 import { User } from "../../interfaces/user.interface";
 import { TrainingService } from "../../services/training.service";
@@ -89,14 +89,14 @@ export class HomeComponent {
       {
         name: 'Calories Burned',
         series: this.trainings.map(t => ({
-          name: t.entry.dateOfEntry,
+          name: t.dateOfEntry,
           value: t.caloriesBurned
         }))
       },
       {
         name: 'Duration (min)',
         series: this.trainings.map(t => ({
-          name: t.entry.dateOfEntry,
+          name: t.dateOfEntry,
           value: t.duration
         }))
       }
@@ -108,28 +108,28 @@ export class HomeComponent {
       {
         name: 'Calories',
         series: this.nutritions.map(t => ({
-          name: t.entry.dateOfEntry,
+          name: t.dateOfEntry,
           value: t.calories
         }))
       },
       {
         name: 'Fats',
         series: this.nutritions.map(t => ({
-          name: t.entry.dateOfEntry,
+          name: t.dateOfEntry,
           value: t.fats
         }))
       },
       {
         name: 'Carbohydrates',
         series: this.nutritions.map(t => ({
-          name: t.entry.dateOfEntry,
+          name: t.dateOfEntry,
           value: t.carbohydrates
         }))
       },
       {
         name: 'Proteins',
         series: this.nutritions.map(t => ({
-          name: t.entry.dateOfEntry,
+          name: t.dateOfEntry,
           value: t.protein
         }))
       },
@@ -141,7 +141,7 @@ export class HomeComponent {
       {
         name: 'Weigth',
         series: this.weigth.map(t => ({
-          name: t.entry.dateOfEntry,
+          name: t.dateOfEntry,
           value: t.value
         }))
       }

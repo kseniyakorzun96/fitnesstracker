@@ -1,27 +1,22 @@
-export interface Nutrition {
-    id: string,
-    entry: Entry,
+export interface Nutrition extends DataEntry {
     calories: number,
     protein: number,
     carbohydrates: number,
     fats: number
 }
 
-export interface Weigth {
-    id: string,
-    entry: Entry,
+export interface Weigth extends DataEntry {
     value: number,
 }
 
-export interface Training {
-    id: string,
-    entry: Entry,
+export interface Training extends DataEntry{
     trainingType: TrainingType,
     caloriesBurned: number,
     duration: number
 }
 
-export interface Entry {
+export interface DataEntry {
+    id: string,
     userId: string,
     dateOfEntry: Date, 
     updated?: Date

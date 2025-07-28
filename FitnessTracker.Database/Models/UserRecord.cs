@@ -1,6 +1,12 @@
-﻿namespace FitnessTracker.WebApi.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FitnessTracker.Database.Models
 {
-    public class User
+    public class UserRecord
     {
         public string Id { get; set; }
         public string Username { get; set; }
@@ -8,12 +14,6 @@
         public string Surname { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public UserRole Role { get; set; }
-    }
-
-    public enum UserRole
-    {
-        User = 0,
-        Curator = 1
+        public string Role { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 using FitnessTracker.Database.Models;
 
-namespace FitnessTrackerApp.Repositories
+namespace FitnessTracker.Database.Repositories
 {
     public interface INutritionRepository
     {

@@ -1,7 +1,12 @@
-﻿namespace FitnessTrackerApp.Services
+﻿using FitnessTracker.WebApi.Models;
+
+namespace FitnessTracker.WebApi.Services
 {
     public interface IUserService
     {
-        Task<FitnessTrackerApp.Models.User> GetUserByIdAsync(string id);
+        Task<User> GetUserByIdAsync(string id);
+        Task RegisterUserAsync(User user);
+        Task UpdateUserAsync(User user);
+        Task DeleteUserAsync(string id);
     }
 }

@@ -2,7 +2,7 @@
 using FitnessTracker.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FitnessTrackerApp.Repositories
+namespace FitnessTracker.Database.Repositories
 {
     public class TrainingRepository : ITrainingRepository
     {

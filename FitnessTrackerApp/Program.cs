@@ -1,10 +1,7 @@
-﻿using AutoMapper;
-using FitnessTracker.Database;
+﻿using FitnessTracker.Database;
+using FitnessTracker.Database.Repositories;
 using FitnessTracker.WebApi;
-using FitnessTrackerApp.Repositories;
-using FitnessTrackerApp.Services;
-using FitnessTrackerApp.Services.Auth;
-using FitnessTrackerApp.Services.Nutrition;
+using FitnessTracker.WebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,7 +13,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAngularApp",
         policy => policy
-            .AllowAnyOrigin()
+            .SetIsOriginAllowed(origin => origin == "http://localhost:4200")
             .AllowAnyHeader()
             .AllowAnyMethod());
 });
@@ -27,15 +24,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<ITrainingRepository, TrainingRepository>();
+builder.Services.AddScoped<INutritionRepository, NutritionRepository>();
+builder.Services.AddScoped<IWeightRepository, WeightRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITrainingService, TrainingService>();
 builder.Services.AddScoped<INutritionService, NutritionService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IWeightService, WeightService>();
-
-builder.Services.AddScoped<ITrainingRepository, TrainingRepository>();
-builder.Services.AddScoped<INutritionRepository, NutritionRepository>();
-builder.Services.AddScoped<IWeigthRepository, WeightRepository>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
   options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -62,7 +60,6 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 app.UseCors("AllowAngularApp");
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

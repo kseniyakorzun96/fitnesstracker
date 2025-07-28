@@ -6,9 +6,7 @@
 <br>
 <br>
 
-<div class="row">
-  <div class="col-3" id="user-profile">
-    <div class="card" style="width: 18rem;">
+ <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">{{ user?.name }} {{ user?.surname }}</h5>
         <p class="card-text">
@@ -16,8 +14,7 @@
         </p>
       </div>
     </div>
-  </div>
-  <div class="col-9">
+
     <h3>Daily Trainings</h3>
     <ngx-charts-line-chart [view]="[800, 300]" [results]="trainingLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
       [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Value'" [autoScale]="true">
@@ -37,8 +34,6 @@
     <h3>Nutrition balance</h3>
     <ngx-charts-pie-chart [view]="[500, 500]" [results]="pieChartData" [legend]="true" [labels]="true" [doughnut]="false" [explodeSlices]="false" [gradient]="true">
           </ngx-charts-pie-chart>
-  </div>
-</div>
 
 <!--
 

@@ -2,9 +2,9 @@
 using FitnessTracker.Database.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FitnessTrackerApp.Repositories
+namespace FitnessTracker.Database.Repositories
 {
-    public class WeightRepository : IWeigthRepository
+    public class WeightRepository : IWeightRepository
     {
         private readonly AppDbContext _context;
 

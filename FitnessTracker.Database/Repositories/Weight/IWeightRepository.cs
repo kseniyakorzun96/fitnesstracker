@@ -1,8 +1,8 @@
 ﻿using FitnessTracker.Database.Models;
 
-namespace FitnessTrackerApp.Repositories
+namespace FitnessTracker.Database.Repositories
 {
-    public interface IWeigthRepository
+    public interface IWeightRepository
     {
         Task<List<WeightRecord>> GetWeightsAsync(string userId);
         Task AddWeightAsync(WeightRecord weightRecord);

@@ -11,6 +11,6 @@ export class WeigthService {
     constructor(private http: HttpClient) {}
     
     getWeigth(userId: string): Observable<Weigth[]> {
-        return this.http.get<Weigth[]>(`${this.apiUrl}/api/weigth/user/${userId}`);
+        return this.http.get<Weigth[]>(`${this.apiUrl}/api/weight/user/${userId}`);
     }
 }

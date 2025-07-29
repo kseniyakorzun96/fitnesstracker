@@ -12,9 +12,9 @@ namespace FitnessTracker.Database.Repositories
             _appDbContext = appDbContext;
         }
 
-        public async Task<UserRecord> GetUserByIdAsync(string userId)
+        public async Task<UserRecord> GetUserAsync(string username)
         {
-            return await _appDbContext.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            return await _appDbContext.Users.FirstOrDefaultAsync(u => u.Username == username);
         }
 
         public async Task RegisterUser(UserRecord user)

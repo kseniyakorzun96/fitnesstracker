@@ -18,7 +18,7 @@ namespace FitnessTracker.WebApi.Services
 
         public async Task<User> GetUserByIdAsync(string id)
         {
-            var entity = await _userRepository.GetUserByIdAsync(id);
+            var entity = await _userRepository.GetUserAsync(id);
             return _mapper.Map<User>(entity);
         }
 

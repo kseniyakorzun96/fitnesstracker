@@ -31,7 +31,6 @@ export class HomeComponent {
     private trainingService: TrainingService,
     private nutritionService: NutritionService,
     private userService: UserService,
-    private authService: AuthService,
     private weigthService: WeigthService,
     private router: Router) { }
 
@@ -180,11 +179,6 @@ export class HomeComponent {
       dates.push(d);
     }
     return dates.reverse();
-  }
-
-  logout(event: MouseEvent) {
-    this.authService.logout();
-    this.router.navigate(['login']);
   }
 
   isToday(date: Date) {

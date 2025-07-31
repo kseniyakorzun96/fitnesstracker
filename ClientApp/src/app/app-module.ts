@@ -12,6 +12,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { authReducer } from './ngrx/auth.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './ngrx/auth.effects';
 
 @NgModule({
   declarations: [
@@ -28,6 +32,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     NgxChartsModule,
     ReactiveFormsModule,
+    StoreModule.forRoot({ auth: authReducer }),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

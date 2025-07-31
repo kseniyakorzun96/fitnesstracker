@@ -2,6 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
+import { AuthState } from "../../ngrx/auth.state";
+import { Store } from "@ngrx/store";
+import { login } from "../../ngrx/auth.actions";
+import { LoginForm } from "../../interfaces/user.interface";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +14,7 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent {
     errorMessage: string = '';
-    constructor(private authService: AuthService, private router: Router){
+    constructor(private store: Store<AuthState>){
 
     }
     
@@ -19,6 +23,21 @@ export class LoginComponent {
     password: new FormControl('', Validators.required)
   });
 
+  onSubmit() {
+    const username = String(this.loginForm.get('username')?.value);
+    const password = String(this.loginForm.get('password')?.value);
+
+    var f: LoginForm = {
+      username: username,
+      password: password
+    };
+
+    this.store.dispatch(login({ login: f }));
+  }
+}
+
+
+  /*
   onSubmit() {
     if (this.loginForm.valid) {
       console.log('Login data:', this.loginForm.value);
@@ -36,4 +55,4 @@ export class LoginComponent {
         }
 })
   }
-}
+*/

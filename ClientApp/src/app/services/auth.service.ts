@@ -1,37 +1,38 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { LoginForm, User } from "../interfaces/user.interface";
-import { Router } from "@angular/router";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
+import { LoginForm, User } from '../interfaces/user.interface';
+
+interface AuthResponse {
+  token: string;
+  user: User;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-    private apiUrl: string = 'http://localhost:5047';
-    constructor(private http: HttpClient, private router: Router) {}
-    
-    login(username: string, password: string) {
-        const user: LoginForm = {
-            username: username,
-            password: password,
-        };
-        return this.http.post(`${this.apiUrl}/api/Auth/login`, user);
+  private readonly API_URL = 'http://localhost:5047/api/auth';
+
+  constructor(private http: HttpClient) {}
+
+  login(login: LoginForm): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.API_URL}/login`, login);
   }
 
-  getUserRole(){
-    return this.http.get(`${this.apiUrl}/api/Auth/role`);
+  register(email: string, password: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.API_URL}/register`, { email, password });
   }
 
-  isLoggedIn(){
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (user != null) return true;
-    else return false;
+  logout(): void {
+    localStorage.removeItem('token');
   }
 
-  logout() {
-    this.http.post('/api/logout', {}).subscribe(() => {
-      localStorage.removeItem('authToken');
-      this.router.navigate(['/login']);
-    });
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  isLoggedIn(): boolean {
+    return !!this.getToken();
   }
 }

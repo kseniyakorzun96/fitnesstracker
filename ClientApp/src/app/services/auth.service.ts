@@ -26,6 +26,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    sessionStorage.clear();
   }
 
   getToken(): string | null {
@@ -33,6 +34,10 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    return !!this.getToken();
+    var user = sessionStorage.getItem('user');
+    if (user != null) {
+      return true;
+    }
+    else return false;
   }
 }

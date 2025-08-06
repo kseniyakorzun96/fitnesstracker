@@ -15,10 +15,10 @@ namespace FitnessTrackerApp.Controllers
             _userService = userService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(string id)
+        [HttpGet("{username}")]
+        public async Task<ActionResult<User>> GetUser(string username)
         {
-            var user = await _userService.GetUserByIdAsync(id);
+            var user = await _userService.GetUserAsync(username);
             return new OkObjectResult(user);
         }
 

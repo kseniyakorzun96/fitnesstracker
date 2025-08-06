@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { authReducer } from './ngrx/auth.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './ngrx/auth.effects';
+import { RegisterComponent } from './components/register.component/register.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AuthEffects } from './ngrx/auth.effects';
     HeaderComponent,
     HomeComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

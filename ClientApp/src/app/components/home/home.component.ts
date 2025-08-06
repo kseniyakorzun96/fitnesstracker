@@ -20,8 +20,12 @@ export class HomeComponent {
   nutritions: Nutrition[] = [];
   weigth: Weigth[] = [];
 
-  trainingLineChartData: any[] = [];
-  nutritionLineChartData: any[] = [];
+  trainingDurationLineChartData: any[] = [];
+  trainingCaloriesLineChartData: any[] = [];
+
+  nutritionCaloriesLineChartData: any[] = [];
+  nutritionFPCLineChartData: any[] = [];
+
   weigthLineChartData: any[] = [];
 
   pieChartData: any[] = [];
@@ -84,14 +88,7 @@ export class HomeComponent {
   }
 
   initLineChartData() {
-    this.trainingLineChartData = [
-      {
-        name: 'Calories Burned',
-        series: this.trainings.map(t => ({
-          name: t.dateOfEntry,
-          value: t.caloriesBurned
-        }))
-      },
+    this.trainingDurationLineChartData = [
       {
         name: 'Duration (min)',
         series: this.trainings.map(t => ({
@@ -100,17 +97,30 @@ export class HomeComponent {
         }))
       }
     ];
+
+    this.trainingCaloriesLineChartData = [
+      {
+        name: 'Calories Burned',
+        series: this.trainings.map(t => ({
+          name: t.dateOfEntry,
+          value: t.caloriesBurned
+        }))
+      },
+    ]
   }
 
   initNutritionLineChartData() {
-    this.nutritionLineChartData = [
+    this.nutritionCaloriesLineChartData = [
       {
         name: 'Calories',
         series: this.nutritions.map(t => ({
           name: t.dateOfEntry,
           value: t.calories
         }))
-      },
+      }
+    ];
+
+    this.nutritionFPCLineChartData = [
       {
         name: 'Fats',
         series: this.nutritions.map(t => ({

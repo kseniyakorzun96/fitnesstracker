@@ -38,5 +38,5 @@ export const authReducer = createReducer(
     isAuthenticated: false,
     loading: false,
     error: null
-  }))
+  })),
 );

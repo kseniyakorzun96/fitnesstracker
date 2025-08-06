@@ -1,29 +1,44 @@
 <div class="row">
-  <div *ngFor="let d of dateTrack" class="col">
-    <div class="day-track" [ngStyle]="getStyles(d)">{{ d.getDate() }}</div>
+  <div class="col">
+    <h3>Daily Trainings: Duration</h3>
+    <ngx-charts-line-chart [view]="[600, 200]" [results]="trainingDurationLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
+      [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Value'" [autoScale]="true">
+    </ngx-charts-line-chart>
+  </div>
+    <div class="col">
+    <h3>Daily Trainings: Calories</h3>
+    <ngx-charts-line-chart [view]="[600, 200]" [results]="trainingCaloriesLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
+      [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Value'" [autoScale]="true">
+    </ngx-charts-line-chart>
   </div>
 </div>
+
 <br>
 <br>
 
- <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title">{{ user?.name }} {{ user?.surname }}</h5>
-        <p class="card-text">
-          <!-- <button (click)="logout($event)">Log out</button> -->
-        </p>
-      </div>
-    </div>
-
-    <h3>Daily Trainings</h3>
-    <ngx-charts-line-chart [view]="[800, 300]" [results]="trainingLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
+<div class="row">
+  <div class="col">
+    <h3>Daily Nutrition: Calories</h3>
+    <ngx-charts-line-chart [view]="[600, 200]" [results]="nutritionCaloriesLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
       [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Value'" [autoScale]="true">
     </ngx-charts-line-chart>
-
-    <h3>Daily Nutrition</h3>
-    <ngx-charts-line-chart [view]="[800, 300]" [results]="nutritionLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
+  </div>
+    <div class="col">
+    <h3>Daily Nutrition: Fats/Proteions/Carbos</h3>
+    <ngx-charts-line-chart [view]="[600, 200]" [results]="nutritionFPCLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
       [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Date'" [yAxisLabel]="'Value'" [autoScale]="true">
     </ngx-charts-line-chart>
+  </div>
+</div>
+
+<h3>Nutrition balance</h3>
+    <ngx-charts-pie-chart [view]="[500, 500]" [results]="pieChartData" [legend]="true" [labels]="true" [doughnut]="false" [explodeSlices]="false" [gradient]="true">
+          </ngx-charts-pie-chart>
+
+  
+
+<!--
+  
 
     <h3>Weight Statistics</h3>
     <ngx-charts-line-chart [view]="[800, 300]" [results]="weigthLineChartData" [xAxis]="true" [yAxis]="true" [legend]="true"
@@ -35,7 +50,14 @@
     <ngx-charts-pie-chart [view]="[500, 500]" [results]="pieChartData" [legend]="true" [labels]="true" [doughnut]="false" [explodeSlices]="false" [gradient]="true">
           </ngx-charts-pie-chart>
 
-<!--
+
+<div class="row">
+  <div *ngFor="let d of dateTrack" class="col">
+    <div class="day-track" [ngStyle]="getStyles(d)">{{ d.getDate() }}</div>
+  </div>
+</div>
+<br>
+<br>
 
    <ngx-charts-pie-chart [view]="[300, 300]" [results]="pieChartData" [legend]="false" [labels]="true" [doughnut]="false" [explodeSlices]="false" [gradient]="true">
           </ngx-charts-pie-chart>

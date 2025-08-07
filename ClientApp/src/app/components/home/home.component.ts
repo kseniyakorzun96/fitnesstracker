@@ -5,7 +5,6 @@ import { User } from "../../interfaces/user.interface";
 import { TrainingService } from "../../services/training.service";
 import { NutritionService } from "../../services/nutrition.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "../../services/auth.service";
 import { WeigthService } from "../../services/weigth.service";
 
 @Component({
@@ -39,7 +38,15 @@ export class HomeComponent {
     private router: Router) { }
 
   ngOnInit(): void {
-    var userId = 'kkorzun';
+    var userJson = sessionStorage.getItem('user');
+    var userId : string | undefined = '';
+    var isAuth = JSON.parse(sessionStorage.getItem('isAuthenticated') || 'false');
+    
+    if (userJson != null) {
+      this.user = JSON.parse(userJson);
+      userId = this.user?.username;
+    }
+
     this.dateTrack = this.getLast7Days();
 
     if (userId != null) {
@@ -54,16 +61,7 @@ export class HomeComponent {
         }
       });
 
-      this.userService.getUser(userId).subscribe({
-        next: (data) => {
-          this.user = data;
-        },
-        error: (err) => {
-          console.error('Failed to load:', err);
-        }
-      });
-
-      this.nutritionService.getNutrition(userId).subscribe({
+       this.nutritionService.getNutrition(userId).subscribe({
         next: (data) => {
           this.nutritions = data;
           this.initPieChartData();
@@ -83,8 +81,18 @@ export class HomeComponent {
         error: (err) => {
           console.error('Failed to load:', err);
         }
-      })
+      });
+
+      this.userService.getUser(userId).subscribe({
+        next: (data) => {
+          this.user = data;
+        },
+        error: (err) => {
+          console.error('Failed to load:', err);
+        }
+      });
     }
+    else this.router.navigate(['/login']);
   }
 
   initLineChartData() {

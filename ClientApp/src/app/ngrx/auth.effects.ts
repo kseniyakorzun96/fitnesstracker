@@ -24,8 +24,8 @@ export class AuthEffects {
   register$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.register),
-      mergeMap(({ username, password }) =>
-        this.authService.register(username, password).pipe(
+      mergeMap(({ user }) =>
+        this.authService.register(user).pipe(
           tap(response => localStorage.setItem('token', response.token)),
           map(response => AuthActions.registerSuccess({ user: response.user })),
           catchError(error => of(AuthActions.registerFailure({ error: error.message })))

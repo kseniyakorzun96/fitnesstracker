@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { LoginForm, User } from '../interfaces/user.interface';
+import { LoginForm, RegisteredUser, User } from '../interfaces/user.interface';
 
 interface AuthResponse {
   token: string;
@@ -20,8 +20,9 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${this.API_URL}/login`, login);
   }
 
-  register(email: string, password: string): Observable<AuthResponse> {
-    return this.http.post<AuthResponse>(`${this.API_URL}/register`, { email, password });
+  register(user: RegisteredUser): Observable<AuthResponse> {
+    console.log('register ' + user.username);
+    return this.http.post<AuthResponse>(`${this.API_URL}/register`, user);
   }
 
   logout(): void {

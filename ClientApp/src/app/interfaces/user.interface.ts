@@ -17,3 +17,9 @@ export enum UserRole {
     User = 2,
     Curator = 1
 }
+
+export interface RegisteredUser {
+    username: string,
+    email: string,
+    password: string
+}

@@ -14,7 +14,7 @@ namespace FitnessTracker.UnitTests
         public TrainingRepositoryTests()
         {
             var options = new DbContextOptionsBuilder<AppDbContext>()
-                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString()) // unique DB per test
+                .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
 
             _context = new AppDbContext(options);
@@ -24,46 +24,53 @@ namespace FitnessTracker.UnitTests
         [TestMethod]
         public async Task GetTrainingByIdAsync_ShouldReturnCorrectTraining()
         {
-            var training = new TrainingRecord { Id = "T3", UserId = "U3", DateOfEntry = DateTime.Today, TrainingType = "Cardio" };
+            var id = Guid.NewGuid().ToString();
+            var userId = "user1";
+            var training = new TrainingRecord { Id = id, UserId = userId, DateOfEntry = DateTime.Today, TrainingType = "Cardio" };
             _context.Trainings.Add(training);
             await _context.SaveChangesAsync();
 
-            var result = await _repository.GetTrainingByIdAsync("T3");
+            var result = await _repository.GetTrainingByIdAsync(id);
 
             Assert.IsNotNull(result);
-            Assert.AreEqual("U3", result.UserId);
+            Assert.AreEqual(userId, result.UserId);
         }
 
         [TestMethod]
         public async Task AddTrainingAsync_ShouldAddTraining()
         {
+            var id = Guid.NewGuid().ToString();
+            var userId = "user2";
             var training = new TrainingRecord
             {
-                Id = "T1",
-                UserId = "U1",
+                Id = id,
+                UserId = userId,
                 DateOfEntry = DateTime.Today,
                 TrainingType = "Cardio",
             };
 
             await _repository.AddTrainingAsync(training);
 
-            var result = await _context.Trainings.FindAsync("T1");
+            var result = await _repository.GetTrainingByIdAsync(id);
+
             Assert.IsNotNull(result);
-            Assert.AreEqual("U1", result.UserId);
+            Assert.AreEqual(userId, result.UserId);
         }
 
         [TestMethod]
         public async Task UpdateTrainingAsync_ShouldModifyTraining()
         {
-            var training = new TrainingRecord { Id = "T10", UserId = "U8", DateOfEntry = DateTime.Today, TrainingType = "Cardio" };
+            var id = Guid.NewGuid().ToString();
+            var userId = "user3";
+            var training = new TrainingRecord { Id = id, UserId = userId, DateOfEntry = DateTime.Today, TrainingType = "Cardio", CaloriesBurned = 30, Duration = 20 };
             _context.Trainings.Add(training);
             await _context.SaveChangesAsync();
 
-            var updated = new TrainingRecord { Id = "T10", UserId = "U9", DateOfEntry = DateTime.Today.AddDays(1) };
+            var updated = new TrainingRecord { Id = id, UserId = userId, DateOfEntry = DateTime.Today.AddDays(1), TrainingType = "Cardio", CaloriesBurned = 40, Duration = 25 };
             await _repository.UpdateTrainingAsync(updated);
 
-            var result = await _context.Trainings.FindAsync("T10");
-            Assert.AreEqual("U9", result.UserId);
+            var result = await _context.Trainings.FindAsync(id);
+            Assert.AreEqual(userId, result.UserId);
             Assert.AreEqual(DateTime.Today.AddDays(1), result.DateOfEntry);
         }
 
@@ -72,7 +79,9 @@ namespace FitnessTracker.UnitTests
         public async Task DeleteTrainingAsync_ShouldRemoveTraining()
         {
             var id = Guid.NewGuid().ToString();
-            var training = new TrainingRecord { Id = id, UserId = "U2", DateOfEntry = DateTime.Today, TrainingType = "Cardio" };
+            var userId = "user4";
+
+            var training = new TrainingRecord { Id = id, UserId = userId, DateOfEntry = DateTime.Today, TrainingType = "Cardio" };
             _context.Trainings.Add(training);
             await _context.SaveChangesAsync();
 

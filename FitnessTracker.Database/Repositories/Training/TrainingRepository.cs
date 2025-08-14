@@ -21,7 +21,8 @@ namespace FitnessTracker.Database.Repositories
 
         public async Task DeleteTrainingAsync(string trainingId)
         {
-            _context.Trainings.Remove(new TrainingRecord { Id = trainingId });
+            var record = await GetTrainingByIdAsync(trainingId);
+            _context.Trainings.Remove(record);
             _context.SaveChanges();
         }
 

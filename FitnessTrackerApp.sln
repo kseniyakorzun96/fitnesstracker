@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessTracker.WebApi", "Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessTracker.Database", "FitnessTracker.Database\FitnessTracker.Database.csproj", "{1082EC53-5344-4B12-A89A-35BEBC7D4AE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessTracker.UnitTests", "FitnessTracker.UnitTests\FitnessTracker.UnitTests.csproj", "{E2D79783-9060-48F6-873B-BF3758AD0C50}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{1082EC53-5344-4B12-A89A-35BEBC7D4AE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1082EC53-5344-4B12-A89A-35BEBC7D4AE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1082EC53-5344-4B12-A89A-35BEBC7D4AE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2D79783-9060-48F6-873B-BF3758AD0C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2D79783-9060-48F6-873B-BF3758AD0C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2D79783-9060-48F6-873B-BF3758AD0C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2D79783-9060-48F6-873B-BF3758AD0C50}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
